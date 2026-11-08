@@ -4,7 +4,7 @@
 
 ### *I build software that goes **live**.*
 
-**My personal portfolio, designed like a live-production control room** — server-rendered on the edge, with a private publishing studio that pushes posts to the site, LinkedIn and dev.to on a schedule.
+**My personal portfolio, designed like a live-production control room** — server-rendered on the edge, with a private studio that publishes posts to the site, LinkedIn and dev.to on a schedule — and reports the site's own traffic.
 
 <a href="https://sumankumarkhan.com"><img src="https://img.shields.io/badge/Visit-sumankumarkhan.com-FF3B30?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Visit the portfolio" title="Visit sumankumarkhan.com" /></a>
 <a href="https://sumankumarkhan.com/work/prisium"><img src="https://img.shields.io/badge/Read-Case_Studies-111111?style=for-the-badge&logo=readdotcv&logoColor=white" alt="Case studies" title="Read the Prisium case study" /></a>
@@ -20,7 +20,7 @@
 <img src="https://img.shields.io/badge/Vite_8-646CFF?style=flat&logo=vite&logoColor=white" alt="Vite 8" title="Vite 8" />
 <img src="https://img.shields.io/badge/Bun-000000?style=flat&logo=bun&logoColor=white" alt="Bun" title="Bun" />
 <img src="https://img.shields.io/badge/Cloudflare_Workers-F38020?style=flat&logo=cloudflare&logoColor=white" alt="Cloudflare Workers" title="Cloudflare Workers, KV, R2 and Access" />
-<img src="https://img.shields.io/badge/Tests-240%2B-2EA043?style=flat&logo=vitest&logoColor=white" alt="240+ tests" title="240+ Vitest tests" />
+<img src="https://img.shields.io/badge/Tests-330%2B-2EA043?style=flat&logo=vitest&logoColor=white" alt="330+ tests" title="330+ Vitest tests" />
 
 </div>
 
@@ -47,11 +47,12 @@
 
 <table>
 <tr>
-<td align="center" width="20%"><h3>10</h3><sub>numbered home sections, from Impact to Contact</sub></td>
-<td align="center" width="20%"><h3>5</h3><sub>engineering case studies with their own pages</sub></td>
-<td align="center" width="20%"><h3>3</h3><sub>publishing targets: site, LinkedIn and dev.to</sub></td>
-<td align="center" width="20%"><h3>⌘K</h3><sub>command palette for every page and action</sub></td>
-<td align="center" width="20%"><h3>240+</h3><sub>automated tests</sub></td>
+<td align="center" width="16%"><h3>10</h3><sub>numbered home sections, from Impact to Contact</sub></td>
+<td align="center" width="16%"><h3>5</h3><sub>engineering case studies with their own pages</sub></td>
+<td align="center" width="16%"><h3>3</h3><sub>publishing targets: site, LinkedIn and dev.to</sub></td>
+<td align="center" width="16%"><h3>⌘K</h3><sub>command palette for every page and action</sub></td>
+<td align="center" width="16%"><h3>0</h3><sub>cookies — privacy-friendly analytics, no banner</sub></td>
+<td align="center" width="16%"><h3>330+</h3><sub>automated tests</sub></td>
 </tr>
 </table>
 
@@ -125,6 +126,56 @@ Jump to any section, case study, the blog, LinkedIn posts or the résumé — or
 - ⭐ **LinkedIn recommendations** section
 - 👋 A polite **exit-intent prompt** to book a call — mouse users only, only after 10 seconds on the page, and silent for 14 days once seen
 - 🕒 A live **IST clock** in the footer, so visitors know when I'm likely to reply
+- 🍪 **Anonymous, cookie-free analytics** — no tracking across sites and no cookie banner to dismiss
+
+---
+
+## 🎚️ Behind the scenes: the private studio
+
+The site has a private back office at `/admin`, protected by Cloudflare Access. It has **three sections, each with its own bookmarkable address**, and opening plain `/admin` takes me back to the one I used last.
+
+<table>
+<tr>
+<td width="33%" valign="top">
+
+### ✍️ Blog posts
+`/admin/blog-posts`
+
+Write and edit MDX posts, publish them live in seconds, and share them to LinkedIn and dev.to now or on a schedule.
+
+</td>
+<td width="33%" valign="top">
+
+### 💬 LinkedIn posts
+`/admin/linkedin-posts`
+
+Short posts with images or video that appear on the site and go to LinkedIn — published on the site only once LinkedIn accepts them.
+
+</td>
+<td width="33%" valign="top">
+
+### 📊 Analytics
+`/admin/analytics`
+
+The site's own traffic report, so I never need to open the Cloudflare dashboard just to look.
+
+</td>
+</tr>
+</table>
+
+**Publishing status at a glance.** Every post card shows a chip for each destination — **site, dev.to and LinkedIn** — marked *posted*, *scheduled*, *in progress* or *failed*. Cards refresh on their own while anything is still pending, and posts are sorted by the date that matters for their state.
+
+**A full analytics dashboard**, mirroring Cloudflare's own:
+
+| Card | What it shows when opened |
+| --- | --- |
+| **Page views** and **Visits** | A trend, plus breakdowns by page, host, referrer, country, browser, operating system and device |
+| **Core Web Vitals** (LCP, INP, CLS) | P50, P75, P90 and P99 for each, a trend, and breakdowns by page, browser, OS and country |
+| **Page load time** | The median now versus the period before, with the same percentiles, trend and breakdowns |
+
+- **Time ranges** from the last 30 minutes to 90 days, or an exact start and end date — charts switch between minute, hour and day buckets to suit
+- With no card open: a page-views chart and the top pages, referrers, countries, devices, browsers and systems
+- Figures follow Cloudflare's defaults — bots excluded, days cut in my own time zone, and change measured against the same length of time before — so the two always agree
 
 ---
 
@@ -141,6 +192,7 @@ flowchart TB
     CR["Cron<br/>every 5 min"] --> W
     W <--> KV[("KV<br/>live posts · schedules")]
     W <--> R2[("R2<br/>post media")]
+    WA[("Web Analytics<br/>cookie-free")]
   end
 
   subgraph EXT["Integrations"]
@@ -152,6 +204,8 @@ flowchart TB
   end
 
   V --> W
+  V -. "anonymous page views" .-> WA
+  W -- "read-only analytics query" --> WA
   A --> AC
   W -- "commit post" --> GH
   GH -. "rebuild & deploy" .-> W
@@ -202,9 +256,11 @@ sequenceDiagram
 | **Own scheduling queue + 5-minute cron** | LinkedIn and dev.to can't schedule posts through their APIs, so the schedule lives in KV and a cron job sends whatever is due |
 | **Never post twice, never post a dead link** | Sends are idempotent: an interrupted send is marked failed rather than retried blindly, a post waits until it's live on the site, and an article already on dev.to is reused, not duplicated |
 | **Email failures never block publishing** | Notifications are sent only after a post is saved, and a failed email can't change or hide it |
+| **Cookie-free analytics, counted only where it means something** | Cloudflare Web Analytics sets no cookies and doesn't follow people across sites, so there's no consent banner. It loads only on the live site, never in `/admin`, and any browser can opt out — so my own visits don't skew the numbers |
+| **Analytics read on the server, one measure at a time** | The Worker queries Cloudflare's analytics API itself, so the dashboard lives in my own studio. Each extra measure (Core Web Vitals, page load time) is a separate request, so one failing metric never hides the main numbers |
 | **Pure, browser-safe helpers** | The camera-switching simulation, timecode and exit-intent logic are plain functions, so they're easy to test without a browser or media streams |
 
-## 🔐 Security
+## 🔐 Security & privacy
 
 - **The admin editor is private twice over**: Cloudflare Access blocks everyone else before the page loads, and the server re-verifies Access's **signed token (RS256, audience-checked)** on every request. If any setting is missing, it **refuses everyone**.
 - **Server-only code is kept out of the browser bundle** by the build, so secrets can't leak to the client.
@@ -212,10 +268,12 @@ sequenceDiagram
 - **No silent overwrites** — saving a post is refused if it changed on GitHub since it was opened.
 - **Contact form**: schema validation on client *and* server, length limits, a request-size cap and a honeypot field against bots.
 - **Uploads are checked by their real file signature**, not just the extension, with size limits per type.
+- **Analytics access is read-only and stays on the server**: the Cloudflare token can only read analytics, never reaches the browser, sits behind the same Access check, and every query is built only from validated values.
+- **Privacy by default**: visitor analytics are anonymous and cookie-free, never load in the private studio, and can be switched off per browser.
 
 ## ✅ Quality
 
-- **240+ automated tests** with Vitest and Testing Library — routing, content, contact form and email, the admin API and its sign-in check, scheduling, cross-posting, cover images, the case-study simulations and more
+- **330+ automated tests** with Vitest and Testing Library — routing, content, contact form and email, the admin API and its sign-in check, scheduling, cross-posting and publishing status, analytics reports and date ranges, cover images, the case-study simulations and more
 - **ESLint + Prettier** across the codebase, and TypeScript end to end
 - **Accessibility**: keyboard-first command palette, focus-managed dialogs, and animations that respect `prefers-reduced-motion`
 - **SEO and sharing**: per-page titles, descriptions, canonical URLs and Open Graph / Twitter cards, plus RSS and an automatically updated sitemap
@@ -230,6 +288,7 @@ sequenceDiagram
 | **Styling & motion** | Tailwind CSS 4, Radix UI primitives, Framer Motion, Geist & Instrument Serif |
 | **Content** | MDX, remark / rehype, Shiki, typed TypeScript content |
 | **Hosting & data** | Cloudflare Workers, KV, R2, Access, Cron Triggers (via Nitro) |
+| **Analytics** | Cloudflare Web Analytics, Cloudflare GraphQL Analytics API |
 | **Integrations** | Resend (email), LinkedIn API, dev.to API, GitHub API, Calendly |
 | **Tooling** | Vite 8, Bun, Vitest, Testing Library, ESLint, Prettier, GitHub Actions |
 
