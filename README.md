@@ -4,7 +4,7 @@
 
 ### *I build software that goes **live**.*
 
-**My personal portfolio, designed like a live-production control room** — server-rendered on the edge, with a private studio that publishes posts to the site, LinkedIn and dev.to on a schedule — and reports the site's own traffic.
+**My personal portfolio, designed like a live-production control room** — server-rendered on the edge, with a private studio that publishes posts to the site, LinkedIn and dev.to on a schedule, reports the site's own traffic, and keeps a private handbook library.
 
 <a href="https://sumankumarkhan.com"><img src="https://img.shields.io/badge/Visit-sumankumarkhan.com-FF3B30?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Visit the portfolio" title="Visit sumankumarkhan.com" /></a>
 <a href="https://sumankumarkhan.com/work/prisium"><img src="https://img.shields.io/badge/Read-Case_Studies-111111?style=for-the-badge&logo=readdotcv&logoColor=white" alt="Case studies" title="Read the Prisium case study" /></a>
@@ -20,7 +20,7 @@
 <img src="https://img.shields.io/badge/Vite_8-646CFF?style=flat&logo=vite&logoColor=white" alt="Vite 8" title="Vite 8" />
 <img src="https://img.shields.io/badge/Bun-000000?style=flat&logo=bun&logoColor=white" alt="Bun" title="Bun" />
 <img src="https://img.shields.io/badge/Cloudflare_Workers-F38020?style=flat&logo=cloudflare&logoColor=white" alt="Cloudflare Workers" title="Cloudflare Workers, KV, R2 and Access" />
-<img src="https://img.shields.io/badge/Tests-330%2B-2EA043?style=flat&logo=vitest&logoColor=white" alt="330+ tests" title="330+ Vitest tests" />
+<img src="https://img.shields.io/badge/Tests-390%2B-2EA043?style=flat&logo=vitest&logoColor=white" alt="390+ tests" title="390+ Vitest tests" />
 
 </div>
 
@@ -52,7 +52,7 @@
 <td align="center" width="16%"><h3>3</h3><sub>publishing targets: site, LinkedIn and dev.to</sub></td>
 <td align="center" width="16%"><h3>⌘K</h3><sub>command palette for every page and action</sub></td>
 <td align="center" width="16%"><h3>0</h3><sub>cookies — privacy-friendly analytics, no banner</sub></td>
-<td align="center" width="16%"><h3>330+</h3><sub>automated tests</sub></td>
+<td align="center" width="16%"><h3>390+</h3><sub>automated tests</sub></td>
 </tr>
 </table>
 
@@ -132,11 +132,11 @@ Jump to any section, case study, the blog, LinkedIn posts or the résumé — or
 
 ## 🎚️ Behind the scenes: the private studio
 
-The site has a private back office at `/admin`, protected by Cloudflare Access. It has **three sections, each with its own bookmarkable address**, and opening plain `/admin` takes me back to the one I used last.
+The site has a private back office at `/admin`, protected by Cloudflare Access. It has **four sections, each with its own bookmarkable address**, and opening plain `/admin` takes me back to the one I used last.
 
 <table>
 <tr>
-<td width="33%" valign="top">
+<td width="25%" valign="top">
 
 ### ✍️ Blog posts
 `/admin/blog-posts`
@@ -144,7 +144,7 @@ The site has a private back office at `/admin`, protected by Cloudflare Access. 
 Write and edit MDX posts, publish them live in seconds, and share them to LinkedIn and dev.to now or on a schedule.
 
 </td>
-<td width="33%" valign="top">
+<td width="25%" valign="top">
 
 ### 💬 LinkedIn posts
 `/admin/linkedin-posts`
@@ -152,12 +152,20 @@ Write and edit MDX posts, publish them live in seconds, and share them to Linked
 Short posts with images or video that appear on the site and go to LinkedIn — published on the site only once LinkedIn accepts them.
 
 </td>
-<td width="33%" valign="top">
+<td width="25%" valign="top">
 
 ### 📊 Analytics
 `/admin/analytics`
 
 The site's own traffic report, so I never need to open the Cloudflare dashboard just to look.
+
+</td>
+<td width="25%" valign="top">
+
+### 📚 Handbooks
+`/admin/handbooks`
+
+A private reading room for my AI-filmmaking study handbooks, read one module at a time.
 
 </td>
 </tr>
@@ -177,6 +185,14 @@ The site's own traffic report, so I never need to open the Cloudflare dashboard 
 - With no card open: a page-views chart and the top pages, referrers, countries, devices, browsers and systems
 - Figures follow Cloudflare's defaults — bots excluded, days cut in my own time zone, and change measured against the same length of time before — so the two always agree
 
+**A private handbook library.** Handbooks are added straight from the studio — paste JSON or upload a file — with no code change and no deploy:
+
+- **Content is data, never code.** Each handbook is plain JSON made of modules and typed blocks — intros, lists, steps, tables, prompts with copy buttons, tips, stats, charts and resource links
+- **Checked as you type**: one validator reports the exact place of every problem, and refuses unknown fields, broken tables and over-long text
+- **A reader built for study**: one module at a time with a numbered progress strip, and progress remembered in the browser only
+- **Manage the library**: add, replace, download as JSON for backup, delete, or restore a built-in original
+- **The private text never enters the code repository** — handbooks are stored in Cloudflare KV, and the files waiting to be added sit in a folder Git ignores
+
 ---
 
 ## 🏗️ Architecture
@@ -185,33 +201,35 @@ The site's own traffic report, so I never need to open the Cloudflare dashboard 
 flowchart TB
   V(["👤 Visitor"])
   A(["🔐 Me, in /admin"])
+  AC["☁️ Cloudflare Access<br/>sign-in + MFA"]
+  CR["⏱️ Cron<br/>every 5 min"]
+  W["⚡ Cloudflare Worker<br/>TanStack Start SSR · admin API"]
 
-  subgraph CF["☁️ Cloudflare edge"]
-    direction LR
-    AC["Access<br/>admin sign-in"] --> W["Worker<br/>TanStack Start SSR"]
-    CR["Cron<br/>every 5 min"] --> W
-    W <--> KV[("KV<br/>live posts · schedules")]
-    W <--> R2[("R2<br/>post media")]
+  subgraph DATA["Cloudflare storage"]
+    KV[("KV<br/>live posts · schedules · handbooks")]
+    R2[("R2<br/>post media")]
     WA[("Web Analytics<br/>cookie-free")]
   end
 
   subgraph EXT["Integrations"]
-    direction LR
-    GH["GitHub<br/>MDX posts · Actions covers"]
-    RS["Resend<br/>email"]
+    GH["GitHub<br/>MDX posts · cover Actions"]
     LI["LinkedIn API"]
     DT["dev.to API"]
+    RS["Resend<br/>email"]
   end
 
   V --> W
+  A --> AC --> W
+  CR --> W
+  W <--> KV
+  W <--> R2
+  W -- "read-only query" --> WA
   V -. "anonymous page views" .-> WA
-  W -- "read-only analytics query" --> WA
-  A --> AC
   W -- "commit post" --> GH
   GH -. "rebuild & deploy" .-> W
-  W --> RS
   W --> LI
   W --> DT
+  W --> RS
 ```
 
 The whole site is **server-rendered on Cloudflare's edge**. Everything a visitor sees — career facts, projects, stack, case studies — lives in **typed content files**, so updating the portfolio means editing data, not markup.
@@ -242,6 +260,29 @@ sequenceDiagram
   W-->>Me: Email: "Blog post published"
 ```
 
+### How a handbook is saved and read
+
+```mermaid
+sequenceDiagram
+  participant Me as /admin/handbooks
+  participant W as Worker (admin API)
+  participant KV as KV store
+
+  Me->>W: Save handbook (JSON)
+  W->>W: Access check · same-origin · JSON only · ≤ 1 MB
+  W->>W: Validate every module and block
+  W->>KV: Store it (one key per handbook)
+  W-->>Me: Saved (or the exact place of each problem)
+
+  Me->>W: Open a handbook
+  W->>W: Access check
+  W->>KV: Read saved copy
+  Note over W,KV: If KV fails, built-in handbooks still load
+  W->>W: Validate again before serving
+  W-->>Me: private, no-cache + ETag (304 if unchanged)
+  Note over Me: Reading progress stays in this browser only
+```
+
 ---
 
 ## 🧠 Key engineering decisions
@@ -258,6 +299,7 @@ sequenceDiagram
 | **Email failures never block publishing** | Notifications are sent only after a post is saved, and a failed email can't change or hide it |
 | **Cookie-free analytics, counted only where it means something** | Cloudflare Web Analytics sets no cookies and doesn't follow people across sites, so there's no consent banner. It loads only on the live site, never in `/admin`, and any browser can opt out — so my own visits don't skew the numbers |
 | **Analytics read on the server, one measure at a time** | The Worker queries Cloudflare's analytics API itself, so the dashboard lives in my own studio. Each extra measure (Core Web Vitals, page load time) is a separate request, so one failing metric never hides the main numbers |
+| **Handbooks as validated JSON, stored outside the code** | New handbooks need no code change or deploy, and their private text never lands in the repository. The same validator checks a handbook on the way in *and* on the way out, and if KV ever fails, the built-in handbooks still load |
 | **Pure, browser-safe helpers** | The camera-switching simulation, timecode and exit-intent logic are plain functions, so they're easy to test without a browser or media streams |
 
 ## 🔐 Security & privacy
@@ -269,11 +311,14 @@ sequenceDiagram
 - **Contact form**: schema validation on client *and* server, length limits, a request-size cap and a honeypot field against bots.
 - **Uploads are checked by their real file signature**, not just the extension, with size limits per type.
 - **Analytics access is read-only and stays on the server**: the Cloudflare token can only read analytics, never reaches the browser, sits behind the same Access check, and every query is built only from validated values.
+- **Handbook text never reaches the page source or the browser bundle** — only the Worker reads it, after the Access check, and refuses everyone if that check isn't configured. Saving requires a same-origin JSON request, every handbook is capped at 1 MB, and responses are `private, no-cache` with ETags.
+- **Safe links only** — resource links must be full `https://` addresses (`javascript:`, `data:`, relative links and embedded passwords are refused when saving) and open in a new tab with `noopener noreferrer`.
+- **The studio stays out of search engines and analytics** — every `/admin` page is marked `noindex, nofollow` and never loads the analytics script.
 - **Privacy by default**: visitor analytics are anonymous and cookie-free, never load in the private studio, and can be switched off per browser.
 
 ## ✅ Quality
 
-- **330+ automated tests** with Vitest and Testing Library — routing, content, contact form and email, the admin API and its sign-in check, scheduling, cross-posting and publishing status, analytics reports and date ranges, cover images, the case-study simulations and more
+- **390+ automated tests** with Vitest and Testing Library — routing, content, contact form and email, the admin API and its sign-in check, scheduling, cross-posting and publishing status, analytics reports and date ranges, handbook validation, storage and API, cover images, the case-study simulations and more
 - **ESLint + Prettier** across the codebase, and TypeScript end to end
 - **Accessibility**: keyboard-first command palette, focus-managed dialogs, and animations that respect `prefers-reduced-motion`
 - **SEO and sharing**: per-page titles, descriptions, canonical URLs and Open Graph / Twitter cards, plus RSS and an automatically updated sitemap
@@ -286,7 +331,7 @@ sequenceDiagram
 | --- | --- |
 | **Framework** | TanStack Start, TanStack Router, React 19, TypeScript |
 | **Styling & motion** | Tailwind CSS 4, Radix UI primitives, Framer Motion, Geist & Instrument Serif |
-| **Content** | MDX, remark / rehype, Shiki, typed TypeScript content |
+| **Content** | MDX, remark / rehype, Shiki, typed TypeScript content, schema-validated JSON handbooks |
 | **Hosting & data** | Cloudflare Workers, KV, R2, Access, Cron Triggers (via Nitro) |
 | **Analytics** | Cloudflare Web Analytics, Cloudflare GraphQL Analytics API |
 | **Integrations** | Resend (email), LinkedIn API, dev.to API, GitHub API, Calendly |
