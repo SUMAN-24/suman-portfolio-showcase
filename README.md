@@ -4,7 +4,7 @@
 
 ### *I build software that goes **live**.*
 
-**My personal portfolio, designed like a live-production control room** — server-rendered on the edge, with a private studio that publishes posts to the site, LinkedIn and dev.to on a schedule, reports the site's own traffic, and keeps a private handbook library.
+**My personal portfolio, designed like a live-production control room** — server-rendered on the edge, with a private studio that publishes posts to the site, LinkedIn, dev.to and Blogger, reports the site's own traffic, and runs the résumé, homepage, recommendations and handbooks — no deploy needed.
 
 <a href="https://sumankumarkhan.com"><img src="https://img.shields.io/badge/Visit-sumankumarkhan.com-FF3B30?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Visit the portfolio" title="Visit sumankumarkhan.com" /></a>
 <a href="https://sumankumarkhan.com/work/prisium"><img src="https://img.shields.io/badge/Read-Case_Studies-111111?style=for-the-badge&logo=readdotcv&logoColor=white" alt="Case studies" title="Read the Prisium case study" /></a>
@@ -20,7 +20,7 @@
 <img src="https://img.shields.io/badge/Vite_8-646CFF?style=flat&logo=vite&logoColor=white" alt="Vite 8" title="Vite 8" />
 <img src="https://img.shields.io/badge/Bun-000000?style=flat&logo=bun&logoColor=white" alt="Bun" title="Bun" />
 <img src="https://img.shields.io/badge/Cloudflare_Workers-F38020?style=flat&logo=cloudflare&logoColor=white" alt="Cloudflare Workers" title="Cloudflare Workers, KV, R2 and Access" />
-<img src="https://img.shields.io/badge/Tests-390%2B-2EA043?style=flat&logo=vitest&logoColor=white" alt="390+ tests" title="390+ Vitest tests" />
+<img src="https://img.shields.io/badge/Tests-720%2B-2EA043?style=flat&logo=vitest&logoColor=white" alt="720+ tests" title="720+ Vitest tests" />
 
 </div>
 
@@ -47,12 +47,12 @@
 
 <table>
 <tr>
-<td align="center" width="16%"><h3>10</h3><sub>numbered home sections, from Impact to Contact</sub></td>
+<td align="center" width="16%"><h3>11</h3><sub>home sections, reordered and shown or hidden from the studio</sub></td>
 <td align="center" width="16%"><h3>5</h3><sub>engineering case studies with their own pages</sub></td>
-<td align="center" width="16%"><h3>3</h3><sub>publishing targets: site, LinkedIn and dev.to</sub></td>
-<td align="center" width="16%"><h3>⌘K</h3><sub>command palette for every page and action</sub></td>
+<td align="center" width="16%"><h3>4</h3><sub>publishing targets: site, LinkedIn, dev.to and Blogger</sub></td>
+<td align="center" width="16%"><h3>7</h3><sub>sections in the private studio</sub></td>
 <td align="center" width="16%"><h3>0</h3><sub>cookies — privacy-friendly analytics, no banner</sub></td>
-<td align="center" width="16%"><h3>390+</h3><sub>automated tests</sub></td>
+<td align="center" width="16%"><h3>720+</h3><sub>automated tests</sub></td>
 </tr>
 </table>
 
@@ -89,17 +89,22 @@ A **Core** toggle trims the board down to the tools I use most.
 ### Case studies
 <img src="docs/screenshots/05-case-study.jpg" alt="Prisium case study" title="Prisium case study" />
 
-Five dedicated pages (**Prisium, App Studio, HRM, AR/VR, Vehicle Tracking**) with role, duration and team context, numbered figures, an interactive producer-studio demo and a simulated camera-switching walkthrough, results, and previous / next navigation.
+Five dedicated pages — **Prisium** (a multi-camera podcast production platform for remote, in-room and hybrid sessions), **App Studio, HRM, AR/VR and Vehicle Tracking** — with role, duration and team context, numbered figures, an interactive producer-studio demo and a simulated camera-switching walkthrough, results, and previous / next navigation.
 
 ### Blog — written in a private editor, published everywhere
 <img src="docs/screenshots/06-blog-post.jpg" alt="Blog post with table of contents" title="Blog post" />
 
-MDX articles with Shiki syntax highlighting, an "On this page" table of contents, reading time, an RSS feed, auto-generated cover images, and a sitemap that updates itself.
+MDX articles with Shiki syntax highlighting, an "On this page" table of contents, reading time, an RSS feed, auto-generated cover images, and a sitemap that updates itself. Each post also shows **where else it's published** — dev.to, LinkedIn or Blogger — with its state and date, such as *Posted 8 Nov 2026* or *Scheduled 20 Nov 2026*, linking to the published copy.
 
 ### Contact
 <img src="docs/screenshots/07-contact.jpg" alt="Contact form and links" title="Contact section" />
 
-A validated form (name, email, company, topic, message) that emails me directly, with a spam honeypot, plus one-click email copy, Calendly booking, LinkedIn, GitHub and résumé download.
+A validated form (name, email, company, topic, message) that emails me directly, with a spam honeypot, plus one-click email copy, Calendly booking, LinkedIn, GitHub, and separate **View online** and **Download PDF** buttons for the résumé.
+
+### Online résumé
+<img src="docs/screenshots/10-resume.jpg" alt="Online résumé page" title="Online résumé at /resume" />
+
+A responsive two-column résumé at `/resume` with **results at a glance**, clear contact details, and a print layout tuned to come out as a clean, single-column PDF with clickable links. The downloadable PDF is managed from the studio.
 
 <table>
 <tr>
@@ -108,7 +113,7 @@ A validated form (name, email, company, topic, message) that emails me directly,
 ### ⌘K command palette
 <img src="docs/screenshots/08-command-palette.jpg" alt="Command palette" title="Command palette (Ctrl/⌘ + K)" />
 
-Jump to any section, case study, the blog, LinkedIn posts or the résumé — or **book a call, copy my email, download the résumé and switch theme** — without touching the mouse. Recently used commands float to the top.
+Jump to any section, case study, the blog, LinkedIn posts, dev.to or the résumé — or **book a call, copy my email, download the résumé and switch theme** — without touching the mouse. Recently used commands float to the top.
 
 </td>
 <td width="38%" valign="top">
@@ -121,18 +126,22 @@ Jump to any section, case study, the blog, LinkedIn posts or the résumé — or
 </table>
 
 ### And the small things
-- 📄 **Printable résumé page** (`/resume`) alongside the PDF download
 - 💬 **"From LinkedIn"** — short posts with images or video, on their own page and previewed on the home page
-- ⭐ **LinkedIn recommendations** section
+- ⭐ **Recommendations** section, managed from the studio
+- 🧭 **Footer with icons** for every link, including dev.to
 - 👋 A polite **exit-intent prompt** to book a call — mouse users only, only after 10 seconds on the page, and silent for 14 days once seen
 - 🕒 A live **IST clock** in the footer, so visitors know when I'm likely to reply
 - 🍪 **Anonymous, cookie-free analytics** — no tracking across sites and no cookie banner to dismiss
+- 📜 **A plain-language privacy policy** (`/privacy`) that's kept in step with what the site actually collects
 
 ---
 
 ## 🎚️ Behind the scenes: the private studio
 
-The site has a private back office at `/admin`, protected by Cloudflare Access. It has **four sections, each with its own bookmarkable address**, and opening plain `/admin` takes me back to the one I used last.
+The site has a private back office at `/admin`, protected by Cloudflare Access. It has **seven sections, each with its own bookmarkable address**, and opening plain `/admin` takes me back to the one I used last. Nearly everything a visitor sees can be changed here **in seconds, without a code change or a deploy**.
+
+<img src="docs/screenshots/11-studio-homepage.jpg" alt="The private studio's Homepage editor" title="Studio — Homepage editor" />
+<p align="center"><sub>The Homepage editor, running locally with the default settings</sub></p>
 
 <table>
 <tr>
@@ -141,7 +150,7 @@ The site has a private back office at `/admin`, protected by Cloudflare Access. 
 ### ✍️ Blog posts
 `/admin/blog-posts`
 
-Write and edit MDX posts, publish them live in seconds, and share them to LinkedIn and dev.to now or on a schedule.
+Write and edit MDX posts, publish them live in seconds, and share them to LinkedIn, dev.to and Blogger now or on a schedule.
 
 </td>
 <td width="25%" valign="top">
@@ -149,7 +158,7 @@ Write and edit MDX posts, publish them live in seconds, and share them to Linked
 ### 💬 LinkedIn posts
 `/admin/linkedin-posts`
 
-Short posts with images or video that appear on the site and go to LinkedIn — published on the site only once LinkedIn accepts them.
+Short posts with images or video that appear on the site and go to LinkedIn — and can be shown or hidden on the site at any time.
 
 </td>
 <td width="25%" valign="top">
@@ -165,13 +174,54 @@ The site's own traffic report, so I never need to open the Cloudflare dashboard 
 ### 📚 Handbooks
 `/admin/handbooks`
 
-A private reading room for my AI-filmmaking study handbooks, read one module at a time.
+A private reading room for my AI-filmmaking study handbooks.
+
+</td>
+</tr>
+<tr>
+<td valign="top">
+
+### 📄 Résumé
+`/admin/resume`
+
+Upload, preview and publish the résumé PDF, with a version history.
+
+</td>
+<td valign="top">
+
+### ⭐ Recommendations
+`/admin/recommendations`
+
+Add, reorder, hide and delete recommendations, with a live preview of the card.
+
+</td>
+<td valign="top">
+
+### 🏠 Homepage
+`/admin/sections`
+
+Reorder, rename, show or hide any home-page section.
+
+</td>
+<td valign="top">
+
+### 🧰 Everywhere
+A live IST clock, an on-demand **deployment status** check, light and dark themes, and **Sign out**.
 
 </td>
 </tr>
 </table>
 
-**Publishing status at a glance.** Every post card shows a chip for each destination — **site, dev.to and LinkedIn** — marked *posted*, *scheduled*, *in progress* or *failed*. Cards refresh on their own while anything is still pending, and posts are sorted by the date that matters for their state.
+**Publishing status at a glance.** Every post card shows a chip for each destination — **site, dev.to, LinkedIn and Blogger** — marked *posted*, *scheduled*, *in progress* or *failed*, with its date. Cards refresh on their own while anything is still pending, and posts are sorted by the date that matters for their state. Lists load with skeletons, posts can be **shown, hidden or deleted** straight from the list, and the sharing panels for each destination sit in tabs.
+
+**Cross-posting done properly:**
+- **dev.to** — a preview drawn in dev.to's own style, code colours included, so I see the article as readers will; the post's description becomes its opening paragraph
+- **Blogger** — connected with Google sign-in. Blogger **schedules the post itself**, so nothing has to run on my site at publish time, and every copy ends with an "Originally published at" link back to the original
+- **LinkedIn** — sent on a schedule by the site's own five-minute cron job
+
+**Résumé manager.** Uploading a PDF saves it as a **draft** to preview; only **Make live** changes what visitors download. The last ten versions are kept and any one can be restored in a click, the live version can't be deleted, I can choose the downloaded file's name, and one master switch hides the résumé buttons across the site.
+
+**Homepage editor.** Hiding a section closes the numbering gap for everything after it, and the floating navigation and footer only ever link to sections that are visible.
 
 **A full analytics dashboard**, mirroring Cloudflare's own:
 
@@ -187,9 +237,9 @@ A private reading room for my AI-filmmaking study handbooks, read one module at 
 
 **A private handbook library.** Handbooks are added straight from the studio — paste JSON or upload a file — with no code change and no deploy:
 
-- **Content is data, never code.** Each handbook is plain JSON made of modules and typed blocks — intros, lists, steps, tables, prompts with copy buttons, tips, stats, charts and resource links
+- **Content is data, never code.** Each handbook is plain JSON made of typed blocks — intros, lists, steps, tables, prompts with copy buttons, tips, notes and warnings, stats, charts, checklists, cards, timelines, journey steps, images and galleries, and resource links
 - **Checked as you type**: one validator reports the exact place of every problem, and refuses unknown fields, broken tables and over-long text
-- **A reader built for study**: one module at a time with a numbered progress strip, and progress remembered in the browser only
+- **Two readers built for study**: one module at a time with a numbered progress strip, or one continuous scroll with a chapter rail. Progress and ticked checklist items are remembered in the browser only
 - **Manage the library**: add, replace, download as JSON for backup, delete, or restore a built-in original
 - **The private text never enters the code repository** — handbooks are stored in Cloudflare KV, and the files waiting to be added sit in a folder Git ignores
 
@@ -205,16 +255,18 @@ flowchart TB
   CR["⏱️ Cron<br/>every 5 min"]
   W["⚡ Cloudflare Worker<br/>TanStack Start SSR · admin API"]
 
-  subgraph DATA["Cloudflare storage"]
-    KV[("KV<br/>live posts · schedules · handbooks")]
-    R2[("R2<br/>post media")]
+  subgraph CFP["Cloudflare platform"]
+    KV[("KV<br/>posts · schedules<br/>homepage · résumé · handbooks")]
+    R2[("R2<br/>media · résumé PDFs")]
     WA[("Web Analytics<br/>cookie-free")]
+    WB["Workers Builds<br/>build & deploy"]
   end
 
   subgraph EXT["Integrations"]
     GH["GitHub<br/>MDX posts · cover Actions"]
     LI["LinkedIn API"]
     DT["dev.to API"]
+    BL["Blogger API<br/>Google sign-in"]
     RS["Resend<br/>email"]
   end
 
@@ -225,14 +277,16 @@ flowchart TB
   W <--> R2
   W -- "read-only query" --> WA
   V -. "anonymous page views" .-> WA
+  W -- "status, on demand" --> WB
   W -- "commit post" --> GH
-  GH -. "rebuild & deploy" .-> W
+  GH -. "push → deploy" .-> WB
   W --> LI
   W --> DT
+  W --> BL
   W --> RS
 ```
 
-The whole site is **server-rendered on Cloudflare's edge**. Everything a visitor sees — career facts, projects, stack, case studies — lives in **typed content files**, so updating the portfolio means editing data, not markup.
+The whole site is **server-rendered on Cloudflare's edge**, and every push is built and deployed by **Cloudflare Workers Builds**. Career facts, projects, stack and case studies live in **typed content files**, while anything I change often — homepage layout, recommendations, the résumé, handbooks and where each post is published — lives in **KV and R2**, so it changes from the studio without a deploy.
 
 ### How publishing a blog post works
 
@@ -242,22 +296,39 @@ sequenceDiagram
   participant W as Worker
   participant KV as KV store
   participant GH as GitHub
-  participant CF as Cloudflare build
+  participant CF as Workers Builds
   participant Ext as LinkedIn / dev.to
+  participant BL as Blogger
 
   Me->>W: Publish post
   W->>W: Verify Cloudflare Access token
   W->>GH: Commit the .mdx file
   W->>KV: Store a live copy
   Note over W,KV: Post is live on the site within seconds
-  GH->>CF: Rebuild (1–2 min)
+  GH->>CF: Push triggers build (1–2 min)
   GH->>GH: Action generates the cover image
   CF-->>W: Built page replaces the live copy
   Me->>W: Share now or schedule
   loop Cron, every 5 minutes
     W->>Ext: Send posts that are due
   end
+  W->>BL: Create post with a publish time
+  Note over BL: Blogger holds it and publishes on time
+  W->>KV: Record where it's published
+  Note over W: Blog page shows "Posted" / "Scheduled" badges
   W-->>Me: Email: "Blog post published"
+```
+
+### How a new résumé goes live
+
+```mermaid
+flowchart LR
+  U["Upload PDF<br/>in /admin/resume"] --> C{"Checks<br/>≤ 2 MB · complete PDF<br/>no scripts, launchers<br/>or attached files"}
+  C -- "refused" --> X["Clear reason shown"]
+  C -- "passes" --> D[("Draft<br/>saved in R2")]
+  D --> P["Preview"] --> L["Make live"]
+  L --> R["/resume.pdf<br/>for visitors"]
+  L --> H[("Last 10 versions<br/>kept to restore")]
 ```
 
 ### How a handbook is saved and read
@@ -295,30 +366,39 @@ sequenceDiagram
 | **Instant publish via KV, build takes over** | A new post is live in seconds instead of waiting for a rebuild; once a newer build is running, the built page wins and the stored copy is ignored |
 | **Safe Markdown renderer for live copies** | Workers don't allow `eval`, which MDX needs, so live copies are drawn by a small renderer that never runs code |
 | **Own scheduling queue + 5-minute cron** | LinkedIn and dev.to can't schedule posts through their APIs, so the schedule lives in KV and a cron job sends whatever is due |
+| **Let Blogger schedule its own posts** | Blogger *can* schedule, so the post is created there with a publish time and Blogger releases it — nothing on my side has to run at that moment, and a guard stops it going out early |
+| **Where a post is published comes from live data, not the post file** | The "Posted" / "Scheduled" badges merge a lasting KV record with the send queues. The cron job copies sent links into that record, because the queues forget them after 90 days |
 | **Never post twice, never post a dead link** | Sends are idempotent: an interrupted send is marked failed rather than retried blindly, a post waits until it's live on the site, and an article already on dev.to is reused, not duplicated |
 | **Email failures never block publishing** | Notifications are sent only after a post is saved, and a failed email can't change or hide it |
 | **Cookie-free analytics, counted only where it means something** | Cloudflare Web Analytics sets no cookies and doesn't follow people across sites, so there's no consent banner. It loads only on the live site, never in `/admin`, and any browser can opt out — so my own visits don't skew the numbers |
 | **Analytics read on the server, one measure at a time** | The Worker queries Cloudflare's analytics API itself, so the dashboard lives in my own studio. Each extra measure (Core Web Vitals, page load time) is a separate request, so one failing metric never hides the main numbers |
 | **Handbooks as validated JSON, stored outside the code** | New handbooks need no code change or deploy, and their private text never lands in the repository. The same validator checks a handbook on the way in *and* on the way out, and if KV ever fails, the built-in handbooks still load |
+| **Change content at runtime, cache what visitors read** | Homepage sections, recommendations and the résumé are KV data edited in the studio, not commits. The homepage layout is read on every visit, so it's cached for 45 seconds and cleared the moment I save — keeping KV usage low without showing a stale page |
+| **Deployment status on demand, never polled** | Cloudflare's Workers Builds API has no simple push option for a Worker, so one click checks the build and keeps checking only while it's still running. Answers are cached for 45 seconds, so several open tabs cost at most one API call |
+| **The Worker never fetches its own address** | On Cloudflare, a Worker can't reliably reach its own public site from inside a request, so "is this post live?" and cover-image checks use the site's own lookup and static-asset binding instead |
 | **Pure, browser-safe helpers** | The camera-switching simulation, timecode and exit-intent logic are plain functions, so they're easy to test without a browser or media streams |
 
 ## 🔐 Security & privacy
 
 - **The admin editor is private twice over**: Cloudflare Access blocks everyone else before the page loads, and the server re-verifies Access's **signed token (RS256, audience-checked)** on every request. If any setting is missing, it **refuses everyone**.
 - **Server-only code is kept out of the browser bundle** by the build, so secrets can't leak to the client.
-- **Least-privilege GitHub token** — it can only write to this one repository.
+- **Least-privilege tokens** — the GitHub token can only write to this one repository, and the deployment-status token can only read build and Worker details.
+- **Sign out properly** — every studio screen has a Sign out button that ends the Cloudflare Access session; editors warn before leaving with unsaved changes.
 - **No silent overwrites** — saving a post is refused if it changed on GitHub since it was opened.
 - **Contact form**: schema validation on client *and* server, length limits, a request-size cap and a honeypot field against bots.
 - **Uploads are checked by their real file signature**, not just the extension, with size limits per type.
+- **Résumé PDFs are inspected before they're accepted** — at most 2 MB, must be a complete PDF, and refused if they contain JavaScript, program launchers, attached files, embedded media or form actions. They're stored outside the public media route and stay drafts until I make one live.
+- **Blogger access stays on the server** — the Google sign-in is handled by the Worker behind the same Access check, never in the browser, and can be disconnected at any time.
 - **Analytics access is read-only and stays on the server**: the Cloudflare token can only read analytics, never reaches the browser, sits behind the same Access check, and every query is built only from validated values.
 - **Handbook text never reaches the page source or the browser bundle** — only the Worker reads it, after the Access check, and refuses everyone if that check isn't configured. Saving requires a same-origin JSON request, every handbook is capped at 1 MB, and responses are `private, no-cache` with ETags.
 - **Safe links only** — resource links must be full `https://` addresses (`javascript:`, `data:`, relative links and embedded passwords are refused when saving) and open in a new tab with `noopener noreferrer`.
 - **The studio stays out of search engines and analytics** — every `/admin` page is marked `noindex, nofollow` and never loads the analytics script.
-- **Privacy by default**: visitor analytics are anonymous and cookie-free, never load in the private studio, and can be switched off per browser.
+- **Privacy by default**: visitor analytics are anonymous and cookie-free, never load in the private studio, and can be switched off per browser. A public privacy policy explains exactly what's collected and is updated whenever that changes.
 
 ## ✅ Quality
 
-- **390+ automated tests** with Vitest and Testing Library — routing, content, contact form and email, the admin API and its sign-in check, scheduling, cross-posting and publishing status, analytics reports and date ranges, handbook validation, storage and API, cover images, the case-study simulations and more
+- **720+ automated tests** with Vitest and Testing Library — routing, content, contact form and email, the admin API and its sign-in check, scheduling and cross-posting to LinkedIn, dev.to and Blogger, publishing badges, analytics, handbooks, the résumé manager and PDF checks, homepage sections and caching, recommendations, deployment status, cover images, the case-study simulations and more
+- **Print-tested résumé** — the résumé's print layout is checked by printing it to PDF and reviewing every page
 - **ESLint + Prettier** across the codebase, and TypeScript end to end
 - **Accessibility**: keyboard-first command palette, focus-managed dialogs, and animations that respect `prefers-reduced-motion`
 - **SEO and sharing**: per-page titles, descriptions, canonical URLs and Open Graph / Twitter cards, plus RSS and an automatically updated sitemap
@@ -332,9 +412,9 @@ sequenceDiagram
 | **Framework** | TanStack Start, TanStack Router, React 19, TypeScript |
 | **Styling & motion** | Tailwind CSS 4, Radix UI primitives, Framer Motion, Geist & Instrument Serif |
 | **Content** | MDX, remark / rehype, Shiki, typed TypeScript content, schema-validated JSON handbooks |
-| **Hosting & data** | Cloudflare Workers, KV, R2, Access, Cron Triggers (via Nitro) |
+| **Hosting & data** | Cloudflare Workers, Workers Builds (Git-connected CI/CD), KV, R2, Access, Cron Triggers (via Nitro) |
 | **Analytics** | Cloudflare Web Analytics, Cloudflare GraphQL Analytics API |
-| **Integrations** | Resend (email), LinkedIn API, dev.to API, GitHub API, Calendly |
+| **Integrations** | Resend (email), LinkedIn API, dev.to API, Blogger API (Google sign-in), GitHub API, Workers Builds API, Calendly |
 | **Tooling** | Vite 8, Bun, Vitest, Testing Library, ESLint, Prettier, GitHub Actions |
 
 ---
